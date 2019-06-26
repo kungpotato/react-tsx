@@ -16,12 +16,13 @@ const App = observer((props: AppProps) => {
     setName("Bob");
   }
 
-  const {greeting} = store!;
+  const {greeting, count} = store!;
 
   return (
       <div className="App">
         <header className="App-header">
-            {greeting}
+            <div>{greeting}</div>
+            <div>{count}</div>
           <button onClick={clickHandler}>Change Greeting</button>
         </header>
       </div>
