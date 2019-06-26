@@ -1,33 +1,31 @@
-import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react';
+import React, {useContext} from 'react'
 import {  MobxStore } from './stores/mobxStore';
+import { observer } from 'mobx-react-lite';
+import {  stores } from './stores';
 
 interface AppProps {
-  mobxStore?: MobxStore,
+  storeTest?: MobxStore,
   test?: string
 }
 
-@inject('mobxStore')
-@observer
-class App extends Component<AppProps> {
+const App = observer((props: AppProps) => {
+  const store = useContext(stores.storeTest)
 
-  private clickHandler = () =>{
-    const {setName} = this.props.mobxStore!;
+  const clickHandler = () =>{
+    const {setName} = store!;
     setName("Bob");
   }
 
-  render() {
-    const {greeting} = this.props.mobxStore!;
-    return (
+  const {greeting} = store!;
+
+  return (
       <div className="App">
         <header className="App-header">
             {greeting}
-          <button onClick={this.clickHandler}>Change Greeting</button>
+          <button onClick={clickHandler}>Change Greeting</button>
         </header>
-        
       </div>
-    )
-  }
-}
+  )
+})
 
 export default App

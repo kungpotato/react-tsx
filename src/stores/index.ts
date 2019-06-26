@@ -1,5 +1,7 @@
-import  {MobxStore}  from "./mobxStore";
+import { createContext , useContext} from 'react'
+import  {MobxStore}  from "../stores/mobxStore";
 
 export const stores = {
-    mobxStore: new MobxStore()
+    storeTest: createContext(new MobxStore())
 }
+
