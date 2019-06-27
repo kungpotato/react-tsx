@@ -9,22 +9,22 @@ interface AppProps {
 }
 
 const useFetch = (url:string) => {
-  const [data, setData] = useState<Response>();
+  const [data, setData] = useState<Array<any>>([]);
   useEffect(()=>{
     const fetchData = async () => {
       let res  = await fetch(url)
       let response = await res.json()
-      setData(response[0])
+      setData(response)
     }
     fetchData()
-  },[])
+  },[url])
   return data
 }
 
 
 const App = observer((props: AppProps) => {
   const store = useContext(stores.storeTest)
-  const URL = 'http://dummy.restapiexample.com/api/v1/employees';
+  const URL = 'https://jsonplaceholder.typicode.com/users';
   const result = useFetch(URL);
 
   const clickHandler = () =>{
@@ -39,7 +39,9 @@ const App = observer((props: AppProps) => {
         <header className="App-header">
             <div>{greeting}</div>
             <div>{count}</div>
-            {console.log(result)}
+            <ol>
+              {result.map(v => <li key={v.id}>{v.name}</li>)}
+            </ol>
           <button onClick={clickHandler}>Change Greeting</button>
         </header>
       </div>
