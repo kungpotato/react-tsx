@@ -24,8 +24,7 @@ const useFetch = (url:string) => {
 
 const App = observer((props: AppProps) => {
   const store = useContext(stores.storeTest)
-  const URL = 'https://jsonplaceholder.typicode.com/users';
-  const result = useFetch(URL);
+  const result = useFetch('https://jsonplaceholder.typicode.com/users');
 
   const clickHandler = () =>{
     const {setName} = store!;
